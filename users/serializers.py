@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
+from .models import CustomUser
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
@@ -49,3 +50,8 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.save()
 
         return user
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ('email',)
