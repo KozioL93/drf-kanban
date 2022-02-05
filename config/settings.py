@@ -42,7 +42,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "rest_framework",
+    'rest_framework.authtoken',
     "users",
+    'django.contrib.sites',
+    'rest_auth',
+    'rest_auth.registration',
+    'djoser',
+
 ]
 
 MIDDLEWARE = [
@@ -153,3 +159,17 @@ SIMPLE_JWT = {
 }
 
 AUTH_USER_MODEL = 'users.CustomUser'
+
+DJOSER = {
+    "USER_ID_FIELD": "email",
+    "LOGIN_FIELD": "email",
+    "SEND_ACTIVATION_EMAIL": True,
+    "ACTIVATION_URL": "#/activate/{uid}/{token}",
+    'SERIALIZERS': {
+        'token_create': 'users.serializers.MyTokenObtainPairSerializer',
+    },
+}
+
+SITE_ID=1
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+SITE_NAME = "Kanban"
